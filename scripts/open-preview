@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+url=https://google.com?tz=America/New_York
+url=${1:-$url} 
+
+id=$(curl 'https://cloudflareworkers.com/script' -H 'pragma: no-cache' -H 'origin: https://cloudflareworkers.com' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: en-US,en;q=0.9' -H 'content-type: text/javascript; charset=UTF-8' -H 'accept: */*' -H 'cache-control: no-cache' -H 'authority: cloudflareworkers.com' -H 'referer: https://cloudflareworkers.com/' --compressed --data-binary @- <&0 | jq -r '.id')
+open "https://cloudflareworkers.com/#$id:$url"
