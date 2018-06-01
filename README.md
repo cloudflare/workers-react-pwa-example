@@ -12,6 +12,7 @@ choice.
 
 - [npm](https://www.npmjs.com/get-npm)
 - [jq](https://stedolan.github.io/jq/) (for the preview script)
+- [cURL](https://curl.haxx.se/) (for the preview script)
 
 ### Instructions
 
