@@ -1,9 +1,10 @@
 const path = require("path");
+
 module.exports = {
-  entry: "./src/all.js",
-  mode: "development",
+  entry: "./src/index.js",
+  mode: "production",
   optimization: {
-    minimize: false
+    minimize: true
   },
   performance: {
     hints: false
@@ -16,14 +17,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.mjs$/,
+        test: /\.m?js$/,
         type: "javascript/auto",
-        use: []
-      },
-      {
-        test: /\.js$/,
-        type: "javascript/auto",
-        use: []
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-react"]
+          }
+        }
       }
     ]
   }

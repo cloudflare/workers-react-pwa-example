@@ -1,21 +1,30 @@
 {
-  "name": "workers-webpack",
+  "name": "workers-react-example",
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "webpack -p --progress --colors",
-    "preview": "node ./scripts/open-preview.js"
+    "build": "webpack -p",
+    "terraform": "yarn build && terraform apply -auto-approve",
+    "deploy": "yarn build && node ./scripts/deploy.js",
+    "preview": "yarn build && node ./scripts/open-preview.js"
   },
   "main": "dist/worker.js",
-  "author": "",
-  "license": "MIT",
+  "author": "@sevki",
+  "license": "BSD",
   "devDependencies": {
     "node-fetch": "^2.2.0",
     "opn": "^5.3.0"
   },
   "dependencies": {
-    "dataloader": "^1.4.0",
-    "graphql": "^0.13.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-dom-server": "^0.0.5",
     "webpack": "^4.10.2",
     "webpack-cli": "^2.1.4"
   }

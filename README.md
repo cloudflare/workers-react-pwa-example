@@ -1,23 +1,50 @@
-![Cloudflare GraphQL Gateway](https://www.cloudflare.com/img/products/cloudflare-workers/workers-api-responses.png)
+![Cloudflare GraphQL Gateway](/img/workers-react.png)
 
-Workers GraphQL Gateway Example
+Workers React Example
 ====
-Building a GraphQL Gateway allows you to make a single query, have GraphQL and take care of breaking it down to multiple rest calls. This example makes use of [dataloader](https://github.com/facebook/dataloader) to batch and cache the queries so a query with the same key will not be requested twice.
+Combining the power of Cloudflare Workers and React will allow you to render the
+same React code you would on the browser on Cloudflare Workers.
 
 ### Dependencies
 - [npm](https://www.npmjs.com/get-npm) or [yarn](https://yarnpkg.com/en/docs/install#debian-stable)
 
 ### Instructions
 
-- `npm install`
-- `npm run build`
+- `yarn preview`
 
-To open the Workers preview with the built Worker:
+#### Terraform
+If you'd like to use terraform to upload your worker scripts, you'll need a
+vars file with the following variables
 
-- `npm run preview`
+```hcl
+# Cloudflare variables
+variable "cloudflare_email" {
+  default = "dmr@bell-labs.com"
+}
+
+variable "cloudflare_token" {
+  default = "00000000000000000000000000"
+}
+
+# GCP exmaple variables
+variable "project" {
+  default = "my-project"
+}
+
+variable "zone" {
+  default = "buzzwords.app"
+}
+
+variable "bucket" {
+  default = "buzzwords"
+}
+```
+after adding this file as `vars.tf` (terraform will pickup any `.tf` extension file) do
+`terraform init` and `terraform apply`
+
 
 ### About
 [Cloudflare Workers](http://developers.cloudflare.com/workers/) allow you to write JavaScript which runs on all of Cloudflare's
 150+ global data centers.
 
-[GraphQL](https://graphql.org) provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.
+[React](https://reactjs.org) makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.
