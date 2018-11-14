@@ -85,7 +85,7 @@ class HelloMessage extends React.Component {
 }
 const header = `<!DOCTYPE html>
 <html lang="en">
-  <title>Cloudflare Workers React Example</title>
+  <title>Cloudflare Workers React PWA Example</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
   #app {
@@ -125,19 +125,12 @@ body {
 .App-link {
   color: #61dafb;
 }
-@keyframes React-Logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
   </style>
-  <body><div id="app">`;
+  <body>
+    <div id="app">`;
 
 const footer = `</div>
+<style src="/worker.js"></script>
 </body>
 </html>`;
 
@@ -147,14 +140,47 @@ let routes = {
 
 async function handleRequest(event) {
   const u = new URL(event.request.url);
-  let rendered = ReactDOMServer.renderToString(routes[u.pathname]);
-  return new Response(header + rendered + footer, {
-    headers: {
-      "Content-Type": "text/html"
-    }
-  });
+  if (u.pathname in routes) {
+    let rendered = ReactDOMServer.renderToString(routes[u.pathname]);
+    return new Response(header + rendered + footer, {
+      headers: {
+        "Content-Type": "text/html"
+      }
+    });
+  }
+  let cache = await caches.open("sevki-react");
+  let response = await cache.match(event.request);
+
+  if (!response) {
+    response = await fetch(event.request);
+    event.waitUntil(cache.put(event.request, response.clone()));
+  }
+
+  return response;
 }
 
 self.addEventListener("fetch", event => {
   event.respondWith(handleRequest(event));
 });
+
+if (typeof navigator !== "undefined") {
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+      const app = document.querySelector("#app");
+      ReactDOM.hydrate(routes[location.pathname], app);
+      navigator.serviceWorker.register("/worker.js").then(
+        function(registration) {
+          // Registration was successful
+          console.log(
+            "ServiceWorker registration successful with scope: ",
+            registration.scope
+          );
+        },
+        function(err) {
+          // registration failed :(
+          console.log("ServiceWorker registration failed: ", err);
+        }
+      );
+    });
+  }
+}
