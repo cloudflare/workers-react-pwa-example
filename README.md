@@ -12,6 +12,12 @@ same React code you would on the browser on Cloudflare Workers.
 
 - `yarn preview`
 
+#### Static hosting
+In order for this application to work, you'll have to be able to serve `/worker.js` from your own origin. 
+This example uses terraform to upload the worker script to Google Cloud Storage, but you are welcome to 
+use any other origin.
+- https://cloud.google.com/storage/docs/hosting-static-website
+
 #### Terraform
 If you'd like to use terraform to upload your worker scripts, you'll need a
 vars file with the following variables
