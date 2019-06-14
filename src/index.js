@@ -130,7 +130,7 @@ body {
     <div id="app">`;
 
 const footer = `</div>
-<style src="/worker.js"></script>
+<script src="/worker.js"></script>
 </body>
 </html>`;
 
