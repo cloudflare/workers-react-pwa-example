@@ -12,7 +12,7 @@
   "author": "@sevki",
   "license": "BSD",
   "devDependencies": {
-    "node-fetch": "^2.2.0",
+    "node-fetch": "^2.6.1",
     "opn": "^5.3.0"
   },
   "dependencies": {
