@@ -22,8 +22,7 @@ async function newWorker(script) {
 readFile("dist/worker.js", "utf8").then(data => {
   newWorker(data).then(id =>
     opn(
-      "https://cloudflareworkers.com/#" + id + ":https://reactjs.org",
-      { app: "chromium" }
+      "https://cloudflareworkers.com/#" + id + ":https://reactjs.org"
     )
   );
 });
