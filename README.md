@@ -32,7 +32,7 @@ variable "cloudflare_token" {
   default = "00000000000000000000000000"
 }
 
-# GCP exmaple variables
+# GCP example variables
 variable "project" {
   default = "my-project"
 }
